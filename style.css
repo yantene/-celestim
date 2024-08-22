@@ -1,0 +1,155 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+:root {
+  --one-day: 4.8s;
+  --sidereal-month: 28;
+}
+
+@keyframes selestial-color {
+  0% { /* 12:00 */
+    background-color: rgb(201, 242, 255);
+  }
+  25% { /* 18:00 */
+    background-color: rgb(255, 173, 49);
+  }
+  50% { /* 00:00 */
+    background-color: rgb(0, 0, 29);
+  }
+  75% { /* 06:00 */
+    background-color: rgb(219, 106, 0);
+  }
+  100% { /* 12:00 */
+    background-color: rgb(201, 242, 255);
+  }
+}
+
+.sky {
+  width: 100vw;
+  height: 100vh;
+
+  animation: selestial-color var(--one-day) linear infinite;
+}
+
+.turntable {
+  width: 100vw;
+  height: 100vw;
+
+  position: absolute;
+  bottom: -50vw;
+}
+
+@keyframes revolution {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.lunar-turntable {
+  animation: revolution calc(var(--one-day) / (1 - (1 / var(--sidereal-month)))) linear infinite;
+  transform-origin: center;
+}
+
+.solar-turntable {
+  animation: revolution var(--one-day) linear infinite;
+  transform-origin: center;
+}
+
+.celestial-body {  
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.moon {
+  width: 10vw;
+  height: 10vw;
+
+  border-radius: 100%;
+}
+
+.moon-light {
+  background-color: rgb(255, 210, 11);
+}
+
+@keyframes moon-light-right-phases {
+  0% { transform: rotateY(0deg); }
+  25% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  75% { transform: rotateY(0deg); }
+  100% { transform: rotateY(0deg); }
+}
+.moon-light-right {
+  clip-path: xywh(50% 0 50% 100%);
+
+  animation: moon-light-right-phases calc(var(--one-day) * var(--sidereal-month)) calc(var(--one-day) * var(--sidereal-month) / 4 * -3) linear infinite;
+}
+
+@keyframes moon-light-left-phases {
+  0% { transform: rotateY(90deg); }
+  25% { transform: rotateY(0deg); }
+  50% { transform: rotateY(0deg); }
+  75% { transform: rotateY(0deg); }
+  100% { transform: rotateY(90deg); }
+}
+.moon-light-left {
+  clip-path: xywh(0 0 50% 100%);
+
+  animation: moon-light-left-phases calc(var(--one-day) * var(--sidereal-month)) calc(var(--one-day) * var(--sidereal-month) / 4 * -3) linear infinite;
+}
+
+@keyframes selestial-color2 {
+  0% { /* 12:00 */
+    background-color: black;
+  }
+}
+
+@keyframes moon-shade-right-phases {
+  0% { transform: rotateY(0deg); }
+  25% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  75% { transform: rotateY(90deg); }
+  100% { transform: rotateY(90deg); }
+}
+.moon-shade-right {
+  clip-path: xywh(50% 0 50% 100%);
+
+  animation: moon-shade-right-phases calc(var(--one-day) * var(--sidereal-month)) calc(var(--one-day) * var(--sidereal-month) / 4 * -1) linear infinite, selestial-color var(--one-day) linear infinite;
+}
+
+@keyframes moon-shade-left-phases {
+  0% { transform: rotateY(90deg); }
+  25% { transform: rotateY(90deg); }
+  50% { transform: rotateY(90deg); }
+  75% { transform: rotateY(0deg); }
+  100% { transform: rotateY(0deg); }
+}
+.moon-shade-left {
+  clip-path: xywh(0 0 50% 100%);
+
+  animation: moon-shade-left-phases calc(var(--one-day) * var(--sidereal-month)) calc(var(--one-day) * var(--sidereal-month) / 4 * -3) linear infinite, selestial-color var(--one-day) linear infinite;
+}
+
+.sun {
+  width: 10vw;
+  height: 10vw;
+
+  background-color: rgb(255, 255, 255);
+
+  border-radius: 50%;
+}
